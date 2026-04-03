@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Full-stack finance dashboard",
+  "type": "module",
   "workspaces": ["frontend", "backend"],
   "scripts": {
     "dev": "run-p dev:frontend dev:backend",

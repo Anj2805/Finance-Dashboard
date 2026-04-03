@@ -5,15 +5,10 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "functions": {
-    "backend/index.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/backend/index.js"
+      "destination": "/api"
     },
     {
       "source": "/(.*)",
