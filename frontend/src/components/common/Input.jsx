@@ -1,0 +1,9 @@
+const Input = ({ label, error, name, type = 'text', className = '', ...rest }) => (
+  <label className="flex flex-col gap-1 text-sm font-medium text-slate-700 dark:text-slate-100">
+    {label && <span>{label}</span>}
+    <input name={name} type={type} className={`${error ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''} ${className}`} {...rest} />
+    {error && <span className="text-xs text-red-500">{error}</span>}
+  </label>
+)
+
+export default Input
