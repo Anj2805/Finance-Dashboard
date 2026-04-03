@@ -12,7 +12,7 @@ const initialForm = {
   type: RECORD_TYPES[0].value,
   category: '',
   date: '',
-  notes: ''
+  note: ''
 }
 
 const RecordFormPage = () => {
@@ -30,13 +30,14 @@ const RecordFormPage = () => {
       if (!isEdit) return
       setInitializing(true)
       try {
-        const { data } = await getRecord(id)
+        const response = await getRecord(id)
+        const recordData = response.data?.data?.record || response.data?.record || response.data || {}
         setForm({
-          amount: data.amount,
-          type: data.type,
-          category: data.category,
-          date: data.date?.slice(0, 10) || '',
-          notes: data.notes || ''
+          amount: recordData.amount || '',
+          type: recordData.type || RECORD_TYPES[0].value,
+          category: recordData.category || '',
+          date: recordData.date?.slice(0, 10) || '',
+          note: recordData.note || ''
         })
       } catch (error) {
         showToast('Unable to load record', 'error')
@@ -136,7 +137,7 @@ const RecordFormPage = () => {
         />
         <label className="flex flex-col gap-1 text-sm font-medium text-slate-700 dark:text-slate-100">
           Notes
-          <textarea name="notes" rows={4} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
+          <textarea name="note" rows={4} value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} />
         </label>
         <div className="flex justify-end gap-3">
           <Button variant="ghost" onClick={() => navigate(-1)} type="button">
